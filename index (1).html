@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>✉️ رسالة</title>
+<meta name="description" content="اضغط لفتح الرسالة">
+<meta property="og:title" content="✉️ رسالة">
+<meta property="og:description" content="اضغط لفتح الرسالة">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&display=swap">
+<style>
+:root{
+  --bg1:#eceae6;--bg2:#d6d2cb;--hint:#8a8378;
+  --w1:#ffffff;--w2:#f4f2ee;--w3:#e9e6e0;--line:rgba(60,50,40,.12);
+  --liner:#e8ddd0;--liner2:#d9ccbb;
+  --paper:#fffdf8;--ink:#2b2622;--soft:#847a6e;--gold:#b08d57;
+  --seal:#7d1520;--seal2:#4d0a12;--seal3:#a8283a;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg1:#23211f;--bg2:#12110f;--hint:#8c857b;color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg1:#23211f;--bg2:#12110f;--hint:#8c857b;color-scheme:dark}
+html,body{height:100%;margin:0;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:radial-gradient(ellipse at 50% 35%,var(--bg1),var(--bg2));font-family:'Amiri','Noto Naskh Arabic',serif;color:var(--ink);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.stage{display:flex;flex-direction:column;align-items:center;gap:40px;transition:opacity .7s,transform .9s}
+.stage.gone{opacity:0;transform:translateY(40px) scale(.95);pointer-events:none}
+
+.env{position:relative;width:min(88vw,390px);aspect-ratio:3/2;perspective:1100px;filter:drop-shadow(0 22px 28px rgba(0,0,0,.28)) drop-shadow(0 4px 6px rgba(0,0,0,.12))}
+.env>*{position:absolute;inset:0}
+.back{background:var(--w3);border-radius:4px}
+.inner{inset:auto;top:0;left:7%;right:7%;height:80%;background:var(--paper);border-radius:2px;z-index:1;transition:transform 1s .55s cubic-bezier(.3,.7,.2,1);box-shadow:0 0 0 1px var(--line)}
+.inner::after{content:"";position:absolute;inset:14px 22px;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);opacity:.5}
+.env.open .inner{transform:translateY(-42%)}
+
+.front{z-index:3;border-radius:4px;overflow:hidden}
+.front i{position:absolute;inset:0;display:block}
+.fl{background:linear-gradient(100deg,var(--w2),var(--w1));clip-path:polygon(0 0,50% 54%,0 100%)}
+.fr{background:linear-gradient(260deg,var(--w2),var(--w1));clip-path:polygon(100% 0,50% 54%,100% 100%)}
+.fb{background:linear-gradient(180deg,var(--w1),var(--w3));clip-path:polygon(0 100%,50% 54%,100% 100%)}
+.front::after{content:"";position:absolute;inset:0;border:1px solid var(--line);border-radius:4px}
+
+.flap{z-index:4;transform-origin:top center;transform-style:preserve-3d;transition:transform .9s .25s cubic-bezier(.4,.1,.2,1),z-index 0s .6s}
+.flap div{position:absolute;inset:0;clip-path:polygon(0 0,100% 0,50% 58%);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.ff{background:linear-gradient(180deg,var(--w2),var(--w1) 80%)}
+.fk{transform:rotateX(180deg);background:repeating-linear-gradient(45deg,var(--liner) 0 7px,var(--liner2) 7px 8px),var(--liner)}
+.env.open .flap{transform:rotateX(180deg);z-index:2}
+
+.label{position:absolute;z-index:5;inset:auto auto 6% 50%;transform:translateX(-50%);width:62%;background:var(--paper);padding:10px 8px 9px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.2),0 0 0 1px var(--line);transition:opacity .4s}
+.label::before{content:"";position:absolute;inset:3px;border:1px solid var(--gold);opacity:.55;pointer-events:none}
+.label b{display:block;font:700 clamp(18px,5.2vw,23px) 'Aref Ruqaa','Amiri',serif;color:var(--ink)}
+.label small{display:block;margin-top:3px;font-size:clamp(12px,3.4vw,14px);color:var(--soft);letter-spacing:.4px}
+.env.open .label{opacity:0}
+
+.seal{position:absolute;z-index:6;inset:auto;top:47%;left:50%;width:21%;aspect-ratio:1;margin:-10.5% 0 0 -10.5%;border:0;padding:0;cursor:pointer;border-radius:48% 52% 50% 50%/52% 48% 52% 48%;
+  background:radial-gradient(circle at 34% 28%,var(--seal3),var(--seal) 55%,var(--seal2));
+  box-shadow:0 5px 10px rgba(0,0,0,.45),inset 0 2px 3px rgba(255,255,255,.2),inset 0 -5px 9px rgba(0,0,0,.4);
+  color:rgba(255,226,214,.92);font:700 clamp(22px,7vw,30px) 'Aref Ruqaa','Amiri',serif;display:flex;align-items:center;justify-content:center;animation:pulse 2.4s infinite;transition:transform .4s,opacity .45s;-webkit-tap-highlight-color:transparent;text-shadow:0 1px 1px rgba(0,0,0,.5)}
+.seal::before{content:"";position:absolute;inset:12%;border-radius:50%;border:1.5px solid rgba(255,220,210,.35)}
+.seal:active{transform:scale(.93)}
+.env.open .seal{opacity:0;transform:scale(1.4) rotate(18deg);pointer-events:none;animation:none}
+@keyframes pulse{0%,100%{box-shadow:0 5px 10px rgba(0,0,0,.45),inset 0 2px 3px rgba(255,255,255,.2),inset 0 -5px 9px rgba(0,0,0,.4),0 0 0 0 rgba(125,21,32,.5)}50%{box-shadow:0 5px 10px rgba(0,0,0,.45),inset 0 2px 3px rgba(255,255,255,.2),inset 0 -5px 9px rgba(0,0,0,.4),0 0 0 15px rgba(125,21,32,0)}}
+.hint{font-size:16px;color:var(--hint);letter-spacing:1px}
+
+.view{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:calc(20px + env(safe-area-inset-top,0px)) 16px calc(20px + env(safe-area-inset-bottom,0px));opacity:0;pointer-events:none;transition:opacity .7s}
+.view.show{opacity:1;pointer-events:auto}
+.paper{position:relative;width:min(100%,470px);max-height:100%;overflow-y:auto;background:var(--paper);padding:12px;border-radius:2px;box-shadow:0 30px 60px rgba(0,0,0,.4),0 0 0 1px var(--line);transform:translateY(70px) scale(.92);transition:transform 1.1s cubic-bezier(.2,.8,.2,1);color:var(--ink)}
+.frame{border:1px solid rgba(176,141,87,.5);padding:32px 22px 24px}
+.view.show .paper{transform:none}
+.paper::-webkit-scrollbar{width:0}
+.mono{display:block;text-align:center;font:700 30px 'Aref Ruqaa','Amiri',serif;color:var(--seal);margin-bottom:4px}
+.orn{display:flex;align-items:center;gap:10px;justify-content:center;color:var(--gold);margin:0 0 22px;font-size:14px}
+.orn::before,.orn::after{content:"";height:1px;width:60px;background:linear-gradient(90deg,transparent,var(--gold))}
+.orn::after{transform:scaleX(-1)}
+.paper h2{font:700 26px 'Aref Ruqaa','Amiri',serif;margin:0 0 14px}
+.paper p{font-size:clamp(20px,5.5vw,23px);line-height:2.05;margin:0 0 6px;opacity:0;transform:translateY(8px);transition:opacity 1s,transform 1s}
+.view.show p,.view.show .sign{opacity:1;transform:none}
+.sign{margin-top:24px;text-align:left;font:700 30px 'Aref Ruqaa','Amiri',serif;color:var(--seal);opacity:0;transform:translateY(8px);transition:opacity 1.2s 6s,transform 1.2s 6s}
+.sign small{display:block;font:400 15px 'Amiri',serif;color:var(--soft);margin-bottom:2px}
+.again{display:block;margin:22px auto 0;background:none;border:1px solid var(--line);color:var(--soft);font:16px 'Amiri',serif;padding:6px 20px;border-radius:20px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="env" id="env">
+    <div class="back"></div>
+    <div class="inner"></div>
+    <div class="front"><i class="fl"></i><i class="fr"></i><i class="fb"></i></div>
+    <div class="flap"><div class="fk"></div><div class="ff"></div></div>
+    <div class="label"><b>رسالة إلى منه</b><small>اضغطي على الختم</small></div>
+    <button class="seal" id="seal" aria-label="افتحي الرسالة">ع</button>
+  </div>
+  <div class="hint">✦ وصلتج رسالة ✦</div>
+</div>
+
+<div class="view" id="view">
+  <div class="paper"><div class="frame">
+    <span class="mono">ع</span>
+    <div class="orn">✦</div>
+    <h2>إلى منه،</h2>
+    <p style="transition-delay:1.0s">ما اعرف شنو اكتب ومنين ابدا، بس راح اوصلج شعوري واوضحلج كل علامة استفهام تريدين تعرفينه.</p>
+    <p style="transition-delay:1.8s">بالنسبة اليه، انتي جزء من يمي، وحاولت اقتلع هل جزء بس ما كدرت، وما اعرف ليش.</p>
+    <p style="transition-delay:2.6s">كل هل سنوات والخلافات الي بينه، دائما الدنيا ترجعنا لنقطة البداية، ونرجع نكون سوة بطريقة لا اني ولا انتي نعرفها.</p>
+    <p style="transition-delay:3.4s">ما اعرف شنو اكتب بعد، بس شعوري تجاهج شي يختلف، شي أكبر من ما تتخيلين.</p>
+    <p style="transition-delay:4.2s">وآخر شي، لا تفكرين إنو كلشي كان غلطج، لا تشيلين كلشي وحدج. خلي نتقاسمه.</p>
+    <p style="transition-delay:5.0s">وبس والله حجيت هواي.</p>
+    <div class="sign">عباس</div>
+    <button class="again" id="again">إغلاق الرسالة</button>
+  </div></div>
+</div>
+
+<script>
+(function(){
+  var env=document.getElementById('env'),stage=document.getElementById('stage'),view=document.getElementById('view');
+  document.getElementById('seal').addEventListener('click',function(){
+    env.classList.add('open');
+    setTimeout(function(){stage.classList.add('gone');view.classList.add('show')},1500);
+  });
+  document.getElementById('again').addEventListener('click',function(){
+    view.classList.remove('show');stage.classList.remove('gone');
+    setTimeout(function(){env.classList.remove('open')},600);
+  });
+})();
+</script>
+</body>
+</html>
